@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
-    fragmentWidth: 2048,
-    fragmentHeight: 2048,
-    canvasWidth: 2048,
-    canvasHeight: 2048,
+    fragmentWidth: 683,
+    fragmentHeight: 683,
+    canvasWidth: 683,
+    canvasHeight: 683,
     bodyId: 0,
     hairId: 0,
     dressId: 0,
@@ -25,6 +25,9 @@ export const useGameStore = defineStore('game', {
     inHandId: 0,
     underwearId: 0,
     irisesId: 0,
+    eyelushesId: 0,
+    eyesId: 0,
+    roomId: 0
   }),
   actions: {
     changePrincess(item: string, id: number) {
@@ -55,6 +58,39 @@ export const useGameStore = defineStore('game', {
           break
         case 'capeTop':
           this.capeTopId = id
+          break
+        case 'cheeks':
+          this.cheeksId = id
+          break
+        case 'earrings':
+          this.earringsId = id
+          break
+        case 'veil':
+          this.veilId = id
+          break
+        case 'hat':
+          this.hatId = id
+          break
+        case 'girdle':
+          this.girdleId = id
+          break
+        case 'gloves':
+          this.glovesId = id
+          break
+        case 'necklace':
+          this.necklaceId = id
+          break
+        case 'inHand':
+          this.inHandId = id
+          break
+        case 'underwear':
+          this.underwearId = id
+          break
+        case 'irises':
+          this.irisesId = id
+          break
+        case 'eyelushes':
+          this.eyelushesId = id
           break
       }
     }

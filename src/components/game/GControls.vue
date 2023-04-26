@@ -1,6 +1,8 @@
 <template>
   <div>
-    
+    <div>
+      <button type="button"></button>
+    </div>
   </div>
 </template>
 

@@ -5,6 +5,7 @@
     <canvas ref="bodyRef" :width="canvasWidth" :height="canvasHeight"></canvas>
     <canvas ref="underwearRef" :width="canvasWidth" :height="canvasHeight"></canvas>
     <canvas ref="eyesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
+    <canvas ref="eyelushesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
     <canvas ref="irisesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
     <canvas ref="cheeksRef" :width="canvasWidth" :height="canvasHeight"></canvas>
     <canvas ref="earringsRef" :width="canvasWidth" :height="canvasHeight"></canvas>
@@ -55,7 +56,9 @@ export default defineComponent({
       glovesId,
       necklaceId,
       inHandId,
-      irisesId
+      irisesId,
+      eyesId,
+      eyelushesId
     } = gameStore
 
     const bodyRef: Ref<HTMLCanvasElement | undefined> = ref()
@@ -106,6 +109,9 @@ export default defineComponent({
     const eyesRef: Ref<HTMLCanvasElement | undefined> = ref()
     const eyesCtx: Ref<CanvasRenderingContext2D | undefined> = ref()
 
+    const eyelushesRef: Ref<HTMLCanvasElement | undefined> = ref()
+    const eyelushesCtx: Ref<CanvasRenderingContext2D | undefined> = ref()
+
     const necklaceRef: Ref<HTMLCanvasElement | undefined> = ref()
     const necklaceCtx: Ref<CanvasRenderingContext2D | undefined> = ref()
 
@@ -139,7 +145,7 @@ export default defineComponent({
       draw() {
         const imgElement = new Image()
         imgElement.src = this.img
-
+        this.currentCtx.imageSmoothingEnabled = true
         imgElement.addEventListener('load', () => {
           this.currentCtx.drawImage(
             imgElement,
@@ -174,6 +180,9 @@ export default defineComponent({
     let necklace: Item
     let inHand: Item
     let dress: Item
+    let eyelushes: Item
+    let eyes: Item
+    let irises: Item
 
     function drawElement(
       canvasRef: HTMLCanvasElement,
@@ -200,13 +209,13 @@ export default defineComponent({
       const canvases = document.querySelectorAll('canvas')
 
       canvases.forEach((v, i) => {
-
-        v.setAttribute('style',`z-index: ${i + 1}`)
+        v.setAttribute('style', `z-index: ${i + 1}`)
       })
     }
 
     onMounted(() => {
       setCanvasZindex()
+
       // BODY
       drawElement(bodyRef.value, bodyCtx.value, body, 'body', bodyId, 0)
 
@@ -256,7 +265,7 @@ export default defineComponent({
       // HAT
       drawElement(hatRef.value, hatCtx.value, hat, 'hat', hatId, 0)
 
-      //   GIRDLE
+      // GIRDLE
       drawElement(girdleRef.value, girdleCtx.value, girdle, 'girdle', girdleId, 0)
 
       // GLOVES
@@ -268,16 +277,14 @@ export default defineComponent({
       // IN HAND
       drawElement(inHandRef.value, inHandCtx.value, inHand, 'inHand', inHandId, 0)
 
-      //   // IRISES
-      //   if (irisesRef.value) {
-      //     irisesCtx.value = irisesRef.value.getContext('2d')
-      //   }
-      //   if (irisesCtx.value) {
-      //     draw(irisesImage, irisesCtx.value, irisesId)
-      //   }
+      // EYELUSHES
+      drawElement(eyelushesRef.value, eyelushesCtx.value, eyelushes, 'eyelushes', eyelushesId, 0)
+
+      // IRISES
+      drawElement(irisesRef.value, irisesCtx.value, irises, 'irises', irisesId, 0)
 
       // EYES
-      //   drawElement(eyesRef.value, eyesCtx.value, eyes, 'eyes', eyesId, 0)
+      drawElement(eyesRef.value, eyesCtx.value, eyes, 'eyes', eyesId, 0)
     })
 
     return {
@@ -302,7 +309,8 @@ export default defineComponent({
       capeBottomRef,
       braceletRef,
       dressRef,
-      irisesRef
+      irisesRef,
+      eyelushesRef
     }
   }
 })
@@ -314,8 +322,8 @@ export default defineComponent({
 
   canvas {
     position: absolute;
-    top: 0;
     left: 0;
+    top: 0;
   }
 }
 </style>
