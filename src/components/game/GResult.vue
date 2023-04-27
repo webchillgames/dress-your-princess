@@ -1,26 +1,28 @@
 <template>
   <div class="g-result">
-    <canvas ref="veilRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="capeBottomRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="bodyRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="underwearRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="eyesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="eyelushesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="irisesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="cheeksRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="earringsRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="shoesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="lipsRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="browsRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="dressRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="necklaceRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="capeTopRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="hairRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="hatRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="girdleRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="glovesRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="braceletRef" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <canvas ref="inHandRef" :width="canvasWidth" :height="canvasHeight"></canvas>
+    <canvas ref="backgroundRef"></canvas>
+    <canvas ref="bodyRef"></canvas>
+    <canvas ref="veilRef"></canvas>
+    <canvas ref="capeBottomRef"></canvas>
+    <canvas ref="bodyRef"></canvas>
+    <canvas ref="underwearRef"></canvas>
+    <canvas ref="eyesRef"></canvas>
+    <canvas ref="eyelushesRef"></canvas>
+    <canvas ref="irisesRef"></canvas>
+    <canvas ref="cheeksRef"></canvas>
+    <canvas ref="earringsRef"></canvas>
+    <canvas ref="shoesRef"></canvas>
+    <canvas ref="lipsRef"></canvas>
+    <canvas ref="browsRef"></canvas>
+    <canvas ref="dressRef"></canvas>
+    <canvas ref="necklaceRef"></canvas>
+    <canvas ref="capeTopRef"></canvas>
+    <canvas ref="hairRef"></canvas>
+    <canvas ref="hatRef"></canvas>
+    <canvas ref="girdleRef"></canvas>
+    <canvas ref="glovesRef"></canvas>
+    <canvas ref="braceletRef"></canvas>
+    <canvas ref="inHandRef"></canvas>
   </div>
 </template>
 
@@ -58,7 +60,8 @@ export default defineComponent({
       inHandId,
       irisesId,
       eyesId,
-      eyelushesId
+      eyelushesId,
+      backgroundId
     } = gameStore
 
     const bodyRef: Ref<HTMLCanvasElement | undefined> = ref()
@@ -124,6 +127,9 @@ export default defineComponent({
     const irisesRef: Ref<HTMLCanvasElement | undefined> = ref()
     const irisesCtx: Ref<CanvasRenderingContext2D | undefined> = ref()
 
+    const backgroundRef: Ref<HTMLCanvasElement | undefined> = ref()
+    const backgroundCtx: Ref<CanvasRenderingContext2D | undefined> = ref()
+
     class Item {
       img: string
       id: number
@@ -155,12 +161,14 @@ export default defineComponent({
             fragmentHeight,
             0,
             0,
-            canvasWidth,
-            canvasHeight
+            fragmentWidth,
+            fragmentHeight
           )
         })
       }
     }
+
+    let background: Item
 
     let body: Item
     let hair: Item
@@ -192,9 +200,6 @@ export default defineComponent({
       id: number,
       yCoord: number
     ) {
-      if (img === 'inHand') {
-        console.log(3)
-      }
       if (canvasRef) {
         canvasCtx = canvasRef.getContext('2d')
       }
@@ -205,17 +210,31 @@ export default defineComponent({
       }
     }
 
-    function setCanvasZindex() {
+    function setCanvasSize() {
       const canvases = document.querySelectorAll('canvas')
 
       canvases.forEach((v, i) => {
-        v.setAttribute('style', `z-index: ${i + 1}`)
+        v.width = fragmentWidth
+        v.height = fragmentHeight
+
+        v.setAttribute(
+          'style',
+          `z-index: ${i + 1}; width: ${canvasWidth}px; height: ${canvasHeight}px`
+        )
       })
     }
 
     onMounted(() => {
-      setCanvasZindex()
+      setCanvasSize()
 
+      drawElement(
+        backgroundRef.value,
+        backgroundCtx.value,
+        background,
+        'background',
+        backgroundId,
+        0
+      )
       // BODY
       drawElement(bodyRef.value, bodyCtx.value, body, 'body', bodyId, 0)
 
@@ -310,7 +329,8 @@ export default defineComponent({
       braceletRef,
       dressRef,
       irisesRef,
-      eyelushesRef
+      eyelushesRef,
+      backgroundRef
     }
   }
 })

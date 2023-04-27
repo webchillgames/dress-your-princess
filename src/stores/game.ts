@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
-    fragmentWidth: 683,
-    fragmentHeight: 683,
+    fragmentWidth: 2048,
+    fragmentHeight: 2048,
     canvasWidth: 683,
     canvasHeight: 683,
     bodyId: 0,
@@ -27,7 +27,7 @@ export const useGameStore = defineStore('game', {
     irisesId: 0,
     eyelushesId: 0,
     eyesId: 0,
-    roomId: 0
+    backgroundId: 0
   }),
   actions: {
     changePrincess(item: string, id: number) {
