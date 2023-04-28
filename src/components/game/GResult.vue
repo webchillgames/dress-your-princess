@@ -339,6 +339,7 @@ export default defineComponent({
 <style lang="scss">
 .g-result {
   position: relative;
+  width: 683px;
 
   canvas {
     position: absolute;

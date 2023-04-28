@@ -1,19 +1,20 @@
 <template>
   <div class="game-view">
-    <GControls
-      :elements="itemsTypes"
-      class="game-view__controls game-view__controls--type-choose"
-    />
     <div class="game-view__result">
       <GResult />
     </div>
 
-    <!-- <GControls class="game-view__controls game-view__controls--type-choose" /> -->
+    <GControls
+      :elements="itemsTypes"
+      class="game-view__controls game-view__controls--type-choose"
+    />
+    <InventoryPage />
   </div>
 </template>
 
 <script lang="ts">
 import GControls from '@/components/game/GControls.vue'
+import InventoryPage from '@/components/game/InventoryPage.vue'
 import GResult from '@/components/game/GResult.vue'
 import { defineComponent, onMounted } from 'vue'
 
@@ -42,18 +43,18 @@ const itemsTypes = [
 ]
 
 export default defineComponent({
-  components: { GResult, GControls },
+  components: { GResult, GControls, InventoryPage },
   setup() {
-    function setGameViewSizes() {
-      const pageWidth = window.innerWidth
-      const pageHeight = window.innerHeight
+    // function setGameViewSizes() {
+    //   const pageWidth = window.innerWidth
+    //   const pageHeight = window.innerHeight
 
-      console.log(pageWidth, pageHeight)
-    }
+    //   // console.log(pageWidth, pageHeight)
+    // }
 
-    onMounted(() => {
-      setGameViewSizes()
-    })
+    // onMounted(() => {
+    //   setGameViewSizes()
+    // })
     return { itemsTypes }
   }
 })
@@ -73,7 +74,7 @@ export default defineComponent({
   &__controls {
     height: 100%;
     height: 683px;
-    // overflow: scroll;
+    overflow: scroll;
   }
 }
 </style>

@@ -27,7 +27,8 @@ export const useGameStore = defineStore('game', {
     irisesId: 0,
     eyelushesId: 0,
     eyesId: 0,
-    backgroundId: 0
+    backgroundId: 0,
+    inventoryOpenPage: 'dress'
   }),
   actions: {
     changePrincess(item: string, id: number) {

@@ -24,6 +24,6 @@ body {
 }
 
 .app {
-  background-image: linear-gradient(to bottom, #31cceb, #63d8ef, #85e3f3, #a4eff9, #c0faff);
+ background-image: linear-gradient(to bottom, #4636a3, #4f34a5, #5832a8, #6130a9, #6a2dab);
 }
 </style>
