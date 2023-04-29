@@ -4,11 +4,10 @@
       <GResult />
     </div>
 
-    <GControls
-      :elements="itemsTypes"
+    <!-- <GControls
       class="game-view__controls game-view__controls--type-choose"
-    />
-    <InventoryPage />
+    /> -->
+    <!-- <InventoryPage /> -->
   </div>
 </template>
 
@@ -17,30 +16,6 @@ import GControls from '@/components/game/GControls.vue'
 import InventoryPage from '@/components/game/InventoryPage.vue'
 import GResult from '@/components/game/GResult.vue'
 import { defineComponent, onMounted } from 'vue'
-
-const itemsTypes = [
-  { id: 'body', title: 'body' },
-  { id: 'hair', title: 'hair' },
-  { id: 'dress', title: 'dress' },
-  { id: 'shoes', title: 'shoes' },
-  { id: 'brows', title: 'brows' },
-  { id: 'lips', title: 'lips' },
-  { id: 'bracelet', title: 'bracelet' },
-  { id: 'cape', title: 'cape' },
-  { id: 'cheeks', title: 'cheeks' },
-  { id: 'earrings', title: 'earrings' },
-  { id: 'veil', title: 'veil' },
-  { id: 'hat', title: 'hat' },
-  { id: 'girdle', title: 'girdle' },
-  { id: 'gloves', title: 'gloves' },
-  { id: 'necklace', title: 'necklace' },
-  { id: 'inHand', title: 'inHand' },
-  { id: 'underwear', title: 'underwear' },
-  { id: 'irises', title: 'irises' },
-  { id: 'eyelushes', title: 'eyelushes' },
-  { id: 'eyes', title: 'eyes' },
-  { id: 'background', title: 'background' }
-]
 
 export default defineComponent({
   components: { GResult, GControls, InventoryPage },
@@ -55,7 +30,7 @@ export default defineComponent({
     // onMounted(() => {
     //   setGameViewSizes()
     // })
-    return { itemsTypes }
+    return { }
   }
 })
 </script>
